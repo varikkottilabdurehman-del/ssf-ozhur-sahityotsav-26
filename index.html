@@ -743,14 +743,7 @@
           <span class="contact-icon">📞</span>
           <span>+91 9207343033</span>
         </a>
-      </div>
-    </div>
-    <div class="contact-form">
-      <input type="text" class="form-input" placeholder="Your name">
-      <input type="email" class="form-input" placeholder="Email address">
-      <textarea class="form-input" placeholder="Your message"></textarea>
-      <button class="btn-primary" onclick="alert('Message sent! We will get back to you soon.')">Send Message</button>
-    </div>
+  </div>
   </div>
 </section>
 
@@ -927,7 +920,7 @@ function launchConfetti() {
   const wrap = document.getElementById('confetti');
   wrap.style.display = 'block';
   const colors = ['#1dcfb4','#c8f03e','#f0b429','#ff4d4d','#4d9fff','#fff'];
-  for (let i = 0; i < 500; i++) {
+  for (let i = 0; i < 200; i++) {
     const el = document.createElement('div');
     el.className = 'confetti-piece';
     el.style.left = Math.random() * 100 + 'vw';

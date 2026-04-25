@@ -21,8 +21,8 @@
     --text: #e8e8e8;
     --muted: #888;
     --border: #2a2a2a;
-    --gold: #f0b429;
-    --silver: #a0aec0;
+    --gold: #FFD700;
+    --silver: #C0C0C0;
     --bronze: #cd7f32;
     --red: #FF2121;
     --blue: #4d9fff;
@@ -32,7 +32,8 @@
     --darkorange: #F0850A; 
     --pink: #FF00AE; 
     --newbrown: #FFFF03;
-    --oggreen: #1EF505; }
+    --oggreen: #1EF505; 
+    --bronze: #CD7F32; }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -279,7 +280,7 @@
     gap: 20px;}
   .team-card.rank-3::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-    background: linear-gradient(90deg, var(--red), transparent);
+    background: linear-gradient(90deg, var(--bronze), transparent);
   }
   .rank-icon { font-size: 1.8rem; flex-shrink: 0; }
   .team-info { flex: 1; min-width: 0; }
@@ -289,7 +290,7 @@
   }
   .team-card.rank-1 .team-name { color: var(--gold); }
   .team-card.rank-2 .team-name { color: var(--blue); }
-  .team-card.rank-3 .team-name { color: var(--red); }
+  .team-card.rank-3 .team-name { color: var(--bronze); }
 
   .score-bar-wrap {
     height: 6px; width: 255px; background: rgba(255,255,255,0.06);
@@ -301,7 +302,7 @@
   }
   .team-card.rank-1 .score-bar { background: var(--gold); }
   .team-card.rank-2 .score-bar { background: var(--blue); }
-  .team-card.rank-3 .score-bar { background: var(--red); }
+  .team-card.rank-3 .score-bar { background: var(--bronze); }
 
   .team-pos-label { font-size: 0.75rem; color: var(--muted); }
 

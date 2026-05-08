@@ -46,6 +46,20 @@
     overflow-x: hidden;
   }
 
+  /* ─── SCROLL PROGRESS BAR ─── */
+  #scroll-progress-bar {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--teal), var(--lime));
+    border-radius: 0 2px 2px 0;
+    box-shadow: 0 0 8px var(--teal), 0 0 16px rgba(200,240,62,0.4);
+    transition: width 0.08s linear;
+    z-index: 101;
+  }
+
   /* ─── NAV ─── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -198,7 +212,119 @@
   .meta-value { font-family: 'Helvetica', sans-serif; font-weight: 900; font-size: 1.5rem;
      }
 
-.hero-btns {
+  /* ─── INFO BOXES ─── */
+  .info-boxes {  
+    display: flex; justify-content: center;
+    gap: 1px;
+    flex-wrap: wrap; 
+    margin-top: 36px;
+    margin-bottom: 20px;
+    position: relative; z-index: 1;    
+    animation: fadeUp 0.6s 0.35s ease both;
+  }
+
+  .info-box {
+    position: relative; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 6px;
+    padding: 10px 24px 20px 20px;
+    border-radius: 14px;
+    min-width: 160px;
+    margin-right: 20px;
+    margin-bottom: 15px; 
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: default;
+  }
+  .info-box:hover {
+    transform: translateY(-4px);
+  }
+
+  /* DATE box — teal accent */
+  .info-box--date {
+    flex-wrap: wrap; align-items: center;
+    background: rgba(29,207,180,0.07);
+    border: 1px solid rgba(29,207,180,0.35);
+    box-shadow: 0 0 30px rgba(29,207,180,0.06);
+  }
+  .info-box--date::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: linear-gradient(180deg, var(--teal), transparent);
+    border-radius: 14px 0 0 14px;
+  }
+  .info-box--date:hover {
+    box-shadow: 0 8px 32px rgba(29,207,180,0.18), 0 0 0 1px rgba(29,207,180,0.4);
+  }
+
+  /* LOCATION box — teal accent */
+  .info-box--location {
+    flex-wrap: wrap; align-items: center;
+    background: rgba(29,207,180,0.07);
+    border: 1px solid rgba(29,207,180,0.35);
+    box-shadow: 0 0 30px rgba(29,207,180,0.06);
+  }
+  .info-box--location::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: linear-gradient(180deg, var(--teal), transparent);
+    border-radius: 14px 0 0 14px;
+  }
+  .info-box--location:hover {
+    box-shadow: 0 8px 32px rgba(29,207,180,0.18), 0 0 0 1px rgba(29,207,180,0.4);
+  }
+
+  /* THEME box — teal accent */
+  .info-box--theme {
+    flex-wrap: wrap; align-items: center;
+    background: rgba(29,207,180,0.07);
+    border: 1px solid rgba(29,207,180,0.35);
+    box-shadow: 0 0 30px rgba(29,207,180,0.06);
+  }
+  .info-box--theme::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: linear-gradient(180deg, var(--teal), transparent);
+    border-radius: 14px 0 0 14px;
+  }
+  .info-box--theme:hover {
+    box-shadow: 0 8px 32px rgba(29,207,180,0.18), 0 0 0 1px rgba(29,207,180,0.4);
+  }
+  .info-box__label {
+    font-family: 'poppins', sans-serif;
+    flex-wrap: wrap; align-items: center;  
+    font-size: 0.95rem;
+    letter-spacing: 0em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0px;
+  }
+  .info-box--date .info-box__label   { color: rgba(29,207,180,0.7); }
+  .info-box--location .info-box__label { color: rgba(29,207,180,0.7); }
+  .info-box--theme .info-box__label  { color: rgba(29,207,180,0.7); }
+
+  .info-box__value {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    line-height: .50;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .info-box__accent {
+    font-size: 1.7rem;
+    color: var(--teal);
+    display: block;
+  }
+  .info-box__sub {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: rgba(240,133,10,0.9);
+    display: block;
+  }
+
+  .hero-btns {
     margin-top: 40px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center; justify-content: space-between;
     position:  ; relative; z-index: 1;
     animation: fadeUp 0.6s 0.4s ease both;
@@ -298,6 +424,10 @@
     font-family: 'poppins', sans-serif; font-weight: 800;
     font-size: 2.2rem;
   }
+  
+  .team-card.rank-1 .team-score { color: var(--gold); }
+.team-card.rank-2 .team-score { color: var(--silver); }
+.team-card.rank-3 .team-score { color: var(--bronze); }
 
   /* Bar spans full width of team-info = from name start to score end */
   .score-bar-wrap {
@@ -474,6 +604,123 @@
     animation: confettiFall linear forwards;
   }
 
+  /* ─── FLOATING LETTERS ─── */
+  .floating-letters {
+    position: absolute; inset: 0; z-index: 0;
+    overflow: hidden; pointer-events: none;
+  }
+  .fl-char {
+    position: absolute;
+    font-family: 'Times New Roman', serif;
+    color: rgba(29,207,180,0.07);
+    animation: floatUp linear infinite;
+    user-select: none;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(100vh); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 0.6; }
+    100% { transform: translateY(-20vh); opacity: 0; }
+  }
+
+  /* ─── GALLERY CAROUSEL ─── */
+  #gallery { background: var(--dark); padding: 80px 5% 60px; }
+
+  .carousel-wrapper {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(29,207,180,0.25),
+      0 0 35px rgba(29,207,180,0.20),
+      0 0 80px rgba(200,240,62,0.10);
+    margin-top: 32px;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  .carousel-slide {
+    min-width: 100%;
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+    background: #111;
+  }
+
+  .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    display: block;
+    transition: transform 0.5s ease;
+    image-rendering: auto;
+    background: #111;
+  }
+
+  .carousel-slide img:hover { transform: scale(1.03); }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(13,13,13,0.75);
+    color: var(--text);
+    border: 1px solid rgba(29,207,180,0.3);
+    border-radius: 50%;
+    width: 46px; height: 46px;
+    font-size: 1.7rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    z-index: 10;
+    backdrop-filter: blur(8px);
+    line-height: 1;
+  }
+
+  .carousel-btn:hover {
+    background: var(--teal);
+    color: var(--dark);
+    border-color: var(--teal);
+    box-shadow: 0 0 18px rgba(29,207,180,0.55);
+  }
+
+  .carousel-prev { left: 16px; }
+  .carousel-next { right: 16px; }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+  }
+
+  .carousel-dot {
+    width: 28px; height: 4px;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.28);
+    cursor: pointer;
+    transition: background 0.3s, width 0.3s;
+    border: none;
+  }
+
+  .carousel-dot.active {
+    background: var(--teal);
+    box-shadow: 0 0 8px var(--teal);
+    width: 42px;
+  }
+
+  @media (max-width: 600px) {
+    .carousel-slide { aspect-ratio: 4 / 3; }
+    .carousel-btn { width: 36px; height: 36px; font-size: 1.3rem; }
+  }
+
   /* ─── RESPONSIVE ─── */
   @media (max-width: 768px) {
     .nav-links { display: none; }
@@ -485,22 +732,120 @@
     .team-score { font-size: 1.6rem; }
     .stats-strip { gap: 24px; }
   }
+
+  /* ─── HISTORY SECTION ─── */
+  #history { background: var(--off); }
+  .history-intro { max-width: 680px; color: var(--muted); font-size: 1rem; line-height: 1.8; margin-bottom: 48px; }
+  .history-timeline { display: flex; flex-direction: column; gap: 0; position: relative; max-width: 750px; }
+  .history-timeline::before {
+    content: ''; position: absolute; left: 18px; top: 0; bottom: 0; width: 2px;
+    background: linear-gradient(180deg, var(--teal), var(--lime), transparent);
+    border-radius: 2px;
+  }
+    
+  .rank-icon1 { font-size:1.3rem; flex-shrink: 0; }
+  
+  .history-item {
+    display: flex; gap: 28px; align-items: flex-start;
+    padding: 0 0 36px 0;
+    position: relative;
+  }
+  
+  .date-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #1a1a1f;
+  border: 1px solid #1dcfb4;
+  border-radius: 100px;
+  padding: 8px 16px 8px 10px;
+  margin-bottom: 13px;
+  margin-right: 40px;
+  font-family: poppins;
+  font-size: 0.78rem;
+  color: #c8c4be;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.date-badge:hover {
+  border-color: #1dcfb4;
+  background: rgba(59, 130, 246, 0.06);
+}
+
+.date-badge svg {
+  width: 16px;
+  height: 16px;
+  color: #1dcfb4;
+}
+  .location-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #1a1a1f;
+  border: 1px solid #1dcfb4;
+  border-radius: 80px;  
+  padding: 8px 18px 8px 10px;
+  margin-bottom: 13px;
+  font-family: poppins;
+  font-size: 0.78rem;
+  color: #c8c4be;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.location-badge:hover {
+  border-color: #1dcfb4;
+  background: rgba(59, 130, 246, 0.06);
+}
+
+.location-badge svg {
+  width: 16px;
+  height: 16px;
+  color: #1dcfb4;
+}
+  .history-dot {
+    width: 38px; height: 38px; border-radius: 10%; flex-shrink: 0;
+    background: var(--card); border: 2px solid var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Mono', monospace; font-size: 0.62rem; color: var(--teal);
+    font-weight: 700; z-index: 1; position: relative;
+    box-shadow: 0 0 14px rgba(29,207,180,0.18);
+  }
+  .history-content {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 24px; flex: 1;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .history-content:hover { border-color: rgba(29,207,180,0.3); transform: translateY(-2px); }
+  .history-year { font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--teal); letter-spacing: 0.1em; margin-bottom: 6px; }
+  .history-event { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 6px; }
+  .history-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+  .history-highlight { color: var(--lime); font-weight: 600; }
+  @media (max-width: 600px) {
+    .history-timeline::before { left: 14px; }
+    .history-dot { width: 30px; height: 30px; font-size: 0.5rem; }
+    .history-item { gap: 18px; }
+  }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:fixed;top:0;left:0;right:0;z-index:100;">
+  <div id="scroll-progress-bar"></div>
   <a class="navbar-brand" href="#">Ozhur Sector Sahityotsav'26</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-link active" href="#home">Home <span class="sr-only">(current)</span></a>
       <a class="nav-link" href="#scoreboard">Team Points</a>
       <a class="nav-link" href="#results">About Participant</a>
       <a class="nav-link" href="#teams">Teams</a>
+      <a class="nav-link" href="#gallery">Gallery</a>
+      <a class="nav-link" href="#history">History</a>
       <a class="nav-link" href="#contact">Contact</a>
     </div>
   </div>
@@ -510,6 +855,7 @@
 <section id="home" class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
+  <div class="floating-letters"></div>
   <div style="font-family: 'Times New Roman',Times, serif; position: relative; z-index: 1;">
   <div class="hero-tag"></fonts>✦ SSF OZHUR SECTOR ✦</div>
   <h2 class="hero-title">
@@ -528,18 +874,20 @@
     <div class="stat"><div class="stat-num" data-target="140" data-suffix="+">140+</div><div class="stat-label">COMPETITIONS</div></div>
     <div class="stat"><div class="stat-num" data-target="250" data-suffix="+">250+</div><div class="stat-label">PARTICIPANTS</div></div>
       </div>
-    <div class="meta-item">
-      <span class="meta-label">Date</span>
-      <span class="meta-value">2026 MAY 16, 17</span>
+  <div class="info-boxes">
+    <div class="info-box info-box--location">
+      <div class="info-box__label">LOCATION</div>
+      <div class="info-box__value">THALAKKATTUR</div>
     </div>
-    <div class="meta-item">
-      <span class="meta-label">Location</span>
-      <span class="meta-value">THALAKKATTUR</span>
+    <div class="info-box info-box--date">
+      <div class="info-box__label">DATE</div>
+      <div class="info-box__value">2026 MAY 23 & 24</div>
     </div>
-    <div class="meta-item">
-      <span class="meta-label">Theme</span>
-      <span class="meta-value">SURVIVAL OF LETTERS</span>
-    </div>
+    <div class="info-box info-box--theme">
+      <div class="info-box__label">THEME</div>
+      <div class="info-box__value">SURVIVAL OF LETTERS</div>
+   </div>
+  </div>
   <div class="hero-btns">
     <a href="#scoreboard" class="btn-primary">View Scoreboard</a>
     <a href="#results" class="btn-primary">Find Participant</a></a>
@@ -563,7 +911,7 @@
       <div class="team-info">
         <div class="team-name-row">
           <div class="team-name">Ayyaya</div>
-          <div class="team-score" id="score1" data-target="0">0</div>
+          <div class="team-score" id="score1" data-target="1000">1000</div>
         </div>
         <div class="score-bar-wrap"><div class="score-bar" style="width:0%" data-width="100%"></div></div>
         <div class="team-pos-label">Position 1</div>
@@ -574,9 +922,9 @@
       <div class="team-info">
         <div class="team-name-row">
           <div class="team-name">Churangara</div>
-          <div class="team-score" id="score2" data-target="0">0</div>
+          <div class="team-score" id="score2" data-target="500">500</div>
         </div>
-        <div class="score-bar-wrap"><div class="score-bar" style="width:0%" data-width="100%"></div></div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:0%" data-width="50%"></div></div>
         <div class="team-pos-label">Position 2</div>
       </div>
     </div>
@@ -585,9 +933,9 @@
       <div class="team-info">
         <div class="team-name-row">
           <div class="team-name">Korad</div>
-          <div class="team-score" id="score3" data-target="0">0</div>
+          <div class="team-score" id="score3" data-target="250">250</div>
         </div>
-        <div class="score-bar-wrap"><div class="score-bar" style="width:0%" data-width="100%"></div></div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:0%" data-width="25%"></div></div>
         <div class="team-pos-label">Position 3</div>
       </div>
     </div>
@@ -595,10 +943,10 @@
       <div class="rank-icon">🏅</div>
       <div class="team-info">
         <div class="team-name-row">
-          <div class="team-name" style="color:var(--teal)">Kuruvattisseri</div>
+          <div class="team-name" style="color:var(--white)">Kuruvattisseri</div>
           <div class="team-score" data-target="0">0</div>
         </div>
-        <div class="score-bar-wrap"><div class="score-bar" style="width:0%;background:var(--teal)" data-width="100%"></div></div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:0%;background:var(--white)" data-width="100%"></div></div>
         <div class="team-pos-label">Position 4</div>
       </div>
     </div>
@@ -606,10 +954,10 @@
       <div class="rank-icon">🏅</div>
       <div class="team-info">
         <div class="team-name-row">
-          <div class="team-name" style="color:var(--teal)">Onakkad</div>
+          <div class="team-name" style="color:var(--white)">Onakkad</div>
           <div class="team-score" data-target="0">0</div>
         </div>
-        <div class="score-bar-wrap"><div class="score-bar" style="width:0%;background:var(--teal)" data-width="100%"></div></div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:0%;background:var(--white)" data-width="100%"></div></div>
         <div class="team-pos-label">Position 5</div>
       </div>
     </div>
@@ -617,10 +965,10 @@
       <div class="rank-icon">🏅</div>
       <div class="team-info">
         <div class="team-name-row">
-          <div class="team-name" style="color:var(--teal)">Ozhur</div>
+          <div class="team-name" style="color:var(--white)">Ozhur</div>
           <div class="team-score" data-target="0">0</div>
         </div>
-        <div class="score-bar-wrap"><div class="score-bar" style="width:0%;background:var(--teal)" data-width="100%"></div></div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:0%;background:var(--white)" data-width="100%"></div></div>
         <div class="team-pos-label">Position 6</div>
       </div>
     </div>
@@ -628,10 +976,10 @@
       <div class="rank-icon">🏅</div>
       <div class="team-info">
         <div class="team-name-row">
-          <div class="team-name" style="color:var(--teal)">Pulpparamb</div>
+          <div class="team-name" style="color:var(--white)">Pulpparamb</div>
           <div class="team-score" data-target="0">0</div>
         </div>
-        <div class="score-bar-wrap"><div class="score-bar" style="width:0%;background:var(--teal)" data-width="100%"></div></div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:0%;background:var(--white)" data-width="100%"></div></div>
         <div class="team-pos-label">Position 7</div>
       </div>
     </div>
@@ -639,10 +987,10 @@
       <div class="rank-icon">🏅</div>
       <div class="team-info">
         <div class="team-name-row">
-          <div class="team-name" style="color:var(--teal)">Thalakkattur</div>
+          <div class="team-name" style="color:var(--white)">Thalakkattur</div>
           <div class="team-score" data-target="0">0</div>
         </div>
-        <div class="score-bar-wrap"><div class="score-bar" style="width:0%;background:var(--teal)" data-width="100%"></div></div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:0%;background:var(--white)" data-width="100%"></div></div>
         <div class="team-pos-label">Position 8</div>
       </div>
     </div>
@@ -650,10 +998,10 @@
       <div class="rank-icon">🏅</div>
       <div class="team-info">
         <div class="team-name-row">
-          <div class="team-name" style="color:var(--teal)">Vellachal</div>
+          <div class="team-name" style="color:var(--white)">Vellachal</div>
           <div class="team-score" data-target="0">0</div>
         </div>
-        <div class="score-bar-wrap"><div class="score-bar" style="width:0%;background:var(--teal)" data-width="100%"></div></div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:0%;background:var(--white)" data-width="100%"></div></div>
         <div class="team-pos-label">Position 9</div>
       </div>
     </div>
@@ -701,71 +1049,294 @@
 
   <div
     <div class="team-detail-card">
-      <div class="td-name green">Ayyaya</div>
+      <div class="td-name" style="color:#c8f03e">Ayyaya</div>
       <div class="stat-label1">Team manager : Sinan</div>
        <div class="stat-label">46 Participants</div>
-       <div class="td-bar green" style="width:100%"></div>
+       <div class="td-bar lime" style="width:100%"></div>
 
     </div>     
     <div class="team-detail-card">
-      <div class="td-name blue">Churangara</div>
+      <div class="td-name" style="color:#1dcfb4">Churangara</div>
       <div class="stat-label1">Team Manager : Swalahudheen</div>
       <div class="stat-label">46 Participants</div>
-      <div class="td-bar blue" style="width:100%"></div>
+      <div class="td-bar green" style="width:100%"></div>
 
     </div>
         <div class="team-detail-card">
-      <div class="td-name" style="color:#1EF505">Korad</div>
+      <div class="td-name" style="color:#c8f03e">Korad</div>
       <div class="stat-label1">Team Manager : Name</div>
       <div class="stat-label">40 Participants</div>
-      <div class="td-bar oggreen" style="width:100%"></div>
+      <div class="td-bar lime" style="width:100%"></div>
 
     </div>
     <div class="team-detail-card">
-      <div class="td-name purple">Kuruvattisseri</div>
+      <div class="td-name green">Kuruvattisseri</div>
       <div class="stat-label1">Team Manager : Name</div>
       <div class="stat-label">60 Participants</div>
-      <div class="td-bar purple" style="width:100%"></div>
+      <div class="td-bar green" style="width:100%"></div>
 
     </div>
     <div class="team-detail-card">
-      <div class="td-name" style="color:#B2F40B;">Onakkad</div>
+      <div class="td-name" style="color:#c8f03e;">Onakkad</div>
       <div class="stat-label1">Team Manager : Name</div>
       <div class="stat-label">81 Participants</div>
-      <div class="td-bar lemonteal" style="width:100%"></div>
+      <div class="td-bar lime" style="width:100%"></div>
 
     </div>
     <div class="team-detail-card">
-      <div class="td-name" style="color:#F0850A;">Ozhur</div>
+      <div class="td-name green">Ozhur</div>
       <div class="stat-label1">Team Manager : Name</div>
       <div class="stat-label">90 Participants</div>
-      <div class="td-bar darkorange" style="width:100%;"></div>
+      <div class="td-bar green" style="width:100%;"></div>
 
     </div>
     <div class="team-detail-card">
-      <div class="td-name" style="color:#FF00AE">Pulpparamb</div>
+      <div class="td-name" style="color:#c8f03e">Pulpparamb</div>
       <div class="stat-label1">Team Manager :Name</div>
       <div class="stat-label">50 Participants</div>
-      <div class="td-bar pink" style="width:100%"></div>
+      <div class="td-bar lime" style="width:100%"></div>
 
     </div>
     <div class="team-detail-card">
-      <div class="td-name" style="color:#FFFF03">Thalakkattur</div>
+      <div class="td-name green">Thalakkattur</div>
       <div class="stat-label1">Team Manager : Sabith</div>
       <div class="stat-label">67 Participants</div>
-      <div class="td-bar newbrown" style="width:100%"></div>
+      <div class="td-bar green" style="width:100%"></div>
 
     </div>
     <div class="team-detail-card">
-      <div class="td-name" style="color:#FF2121">Vellachal</div>
+      <div class="td-name" style="color:#c8f03e">Vellachal</div>
       <div class="stat-label1">Team manager : Name</div>
       <div class="stat-label">50 Participants</div>
-      <div class="td-bar red" style="width:100%"></div>
+      <div class="td-bar lime" style="width:100%"></div>
 
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- GALLERY CAROUSEL -->
+<section id="gallery">
+  <div class="section-tag">// Moments</div>
+  <h2 class="section-title">Gallery</h2>
+  <p class="section-sub">Glimpses from Ozhur sector Sahityotsav History</p>
+
+  <div class="carousel-wrapper">
+    <div class="carousel-track" id="carouselTrack">
+
+      <!-- SLIDE 1 — Copy image link address and paste inside src="" only -->
+      <div class="carousel-slide">
+        <img src="https://scontent.fccj3-1.fna.fbcdn.net/v/t39.30808-6/480811017_1026532142843104_1194872506911127753_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=7b2446&_nc_ohc=znb7WK62tFQQ7kNvwEbSyq3&_nc_oc=AdoajBXY4mFQax7JzKQoSNA5iJtnf4FP-717O05E86UCLNtcHBBBMnHHuCjH7C0TpXsfYVAWzxPaJzbvmDUaHjVH&_nc_zt=23&_nc_ht=scontent.fccj3-1.fna&_nc_gid=QN51_Lx-NGTPqqGY2M17Lg&_nc_ss=7f289&oh=00_Af5XnwyjhVM6Gl4bko0KhhTRxPM9-DFOvOgewEpZ6bbvqg&oe=69FE8914" alt="Gallery Photo 1">
+      </div>
+
+      <!-- SLIDE 2 — Copy image link address and paste inside src="" only -->
+      <div class="carousel-slide">
+        <img src="https://scontent.fccj3-1.fna.fbcdn.net/v/t39.30808-6/485935819_1050926190403699_8345254822584766873_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=13d280&_nc_ohc=DjVRFFy4_qEQ7kNvwEW2F4U&_nc_oc=AdoTRDu3ZBxfBCFVf2x9JKstm07-2YtkKMwUFxfItNt_f1jv6Psqq9QHy2rkVZHUeDHl1XypL2FzFvOsSBnTtGAY&_nc_zt=23&_nc_ht=scontent.fccj3-1.fna&_nc_gid=L8pMDlqwIYTIyCWp-HvAAA&_nc_ss=7f289&oh=00_Af7HRSPP1Qyyavl5-7cZKya3iTHLN20L7-iDphGb8DgePg&oe=69FEAA44" alt="Gallery Photo 2">
+      </div>
+
+      <!-- SLIDE 3 — Copy image link address and paste inside src="" only -->
+      <div class="carousel-slide">
+        <img src="https://cdn.britannica.com/35/238335-050-2CB2EB8A/Lionel-Messi-Argentina-Netherlands-World-Cup-Qatar-2022.jpg" alt="Gallery Photo 3">
+      </div>
+
+      <!-- SLIDE 4 — Copy image link address and paste inside src="" only -->
+      <div class="carousel-slide">
+        <img src="https://drive.google.com/file/d/1j_1EnkJxKV3m8TvfSLk6bC_HxRmdzUE_/view?usp=sharing" alt="Gallery Photo 4">
+      </div>
+
+      <!-- SLIDE 5 — Copy image link address and paste inside src="" only -->
+      <div class="carousel-slide">
+        <img src="https://drive.google.com/file/d/1j_1EnkJxKV3m8TvfSLk6bC_HxRmdzUE_/view?usp=sharing" alt="Gallery Photo 5">
+      </div>
+
+      <!-- SLIDE 6 — Copy image link address and paste inside src="" only -->
+      <div class="carousel-slide">
+        <img src="" alt="Gallery Photo 6">
+      </div>
+
+    </div>
+
+    <button class="carousel-btn carousel-prev" onclick="moveCarousel(-1)">&#8249;</button>
+    <button class="carousel-btn carousel-next" onclick="moveCarousel(1)">&#8250;</button>
+    <div class="carousel-dots" id="carouselDots"></div>
+  </div>
+</section>
+
+<!-- HISTORY SECTION -->
+<section id="history">
+  <div class="section-tag">// Legacy</div>
+  <h2 class="section-title">History</h2>
+  <p class="history-intro">
+    The SSF Ozhur Sector Sahityotsav is one of the most celebrated literary festivals in the region. What started as a modest gathering of students has grown into a landmark cultural event that shapes the next generation of writers, speakers, and artists.
+  </p>
+  <div class="history-timeline">
+      
+      <div class="history-item">
+      <div class="history-dot">2022</div>
+      <div class="history-content">
+        <div class="history-year">// EDITION 29 · 2022</div>
+        <div class="history-event">​Expansion Across Units</div>
+        <div class="history-desc">
+   
+<div class="date-badge">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+    <line x1="16" y1="2" x2="16" y2="6"/>
+    <line x1="8" y1="2" x2="8" y2="6"/>
+    <line x1="3" y1="10" x2="21" y2="10"/>
+  </svg>
+  July - 16 , 17 - 2022
+</div>
+
+<div class="location-badge">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/>
+    <circle cx="12" cy="10" r="3"/>
+  </svg>
+  Korad
+</div>
+           <div class="rank-icon1">🏆     <span class="history-highlight">Churangara</span></div>
+            <div class="rank-icon1">🥈     <span class="history-highlight">Kuruvattissri</span></div>
+            <div class="rank-icon1">🥉     <span class="history-highlight">Korad</span></div>            
+      </div>
+    </div>
+</div>
+
+      
+      <div class="history-item">
+      <div class="history-dot">2023</div>
+      <div class="history-content">
+        <div class="history-year">// EDITION 30 · 2023</div>
+        <div class="history-event">​Expansion Across Units</div>
+        <div class="history-desc">
+   
+<div class="date-badge">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+    <line x1="16" y1="2" x2="16" y2="6"/>
+    <line x1="8" y1="2" x2="8" y2="6"/>
+    <line x1="3" y1="10" x2="21" y2="10"/>
+  </svg>
+  June - 17 , 18 - 2023
+</div>
+
+<div class="location-badge">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/>
+    <circle cx="12" cy="10" r="3"/>
+  </svg>
+  Churangara
+</div>
+           <div class="rank-icon1">🏆     <span class="history-highlight">Churangara</span></div>
+            <div class="rank-icon1">🥈     <span class="history-highlight">Kuruvattisseri</span></div>
+            <div class="rank-icon1">🥉     <span class="history-highlight">Korad</span></div>            
+      </div>
+    </div>
+</div>
+
+    <div class="history-item">
+      <div class="history-dot">2024</div>
+      <div class="history-content">
+        <div class="history-year">// EDITION 31 · 2024</div>
+        <div class="history-event">​A Festival of Culture &amp; Identity</div>
+        <div class="history-desc">
+   
+<div class="date-badge">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+    <line x1="16" y1="2" x2="16" y2="6"/>
+    <line x1="8" y1="2" x2="8" y2="6"/>
+    <line x1="3" y1="10" x2="21" y2="10"/>
+  </svg>
+  July - 13 , 14 - 2024
+</div>
+
+<div class="location-badge">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/>
+    <circle cx="12" cy="10" r="3"/>
+  </svg>
+  Vellachal
+</div>
+           <div class="rank-icon1">🏆     <span class="history-highlight">Churangara</span></div>
+            <div class="rank-icon1">🥈     <span class="history-highlight">Thalakkattur</span></div>
+            <div class="rank-icon1">🥉     <span class="history-highlight">Thalakkattur</span></div>            
+      </div>
+    </div>
+</div>
+
+
+    <div class="history-item">
+      <div class="history-dot">2025</div>
+      <div class="history-content">
+        <div class="history-year">// EDITION 32 · 2025</div>
+        <div class="history-event">​A Islamic Cultural Event in Ai Era</div>
+        <div class="history-desc">
+   
+<div class="date-badge">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+    <line x1="16" y1="2" x2="16" y2="6"/>
+    <line x1="8" y1="2" x2="8" y2="6"/>
+    <line x1="3" y1="10" x2="21" y2="10"/>
+  </svg>
+  June - 14 , 15 - 2025
+</div>
+
+<div class="location-badge">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/>
+    <circle cx="12" cy="10" r="3"/>
+  </svg>
+  Pulpparamb
+</div>
+           <div class="rank-icon1">🏆     <span class="history-highlight">Churangara</span></div>
+            <div class="rank-icon1">🥈     <span class="history-highlight">Thalakkattur</span></div>
+            <div class="rank-icon1">🥉     <span class="history-highlight">Thalakkattur</span></div>            
+      </div>
+    </div>
+</div>
+
+    <div class="history-item">
+      <div class="history-dot">2026</div>
+      <div class="history-content">
+        <div class="history-year">// EDITION 33 · 2026</div>
+        <div class="history-event">​An Event for "Survival of Letters"</div>
+        <div class="history-desc">
+   
+<div class="date-badge">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+    <line x1="16" y1="2" x2="16" y2="6"/>
+    <line x1="8" y1="2" x2="8" y2="6"/>
+    <line x1="3" y1="10" x2="21" y2="10"/>
+  </svg>
+  May - 23 , 24 - 2026
+</div>
+
+<div class="location-badge">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/>
+    <circle cx="12" cy="10" r="3"/>
+  </svg>
+  Thalakkattur
+</div>
+           <div class="rank-icon1">🏆     <span class="history-highlight">......?</span></div>
+            <div class="rank-icon1">🥈     <span class="history-highlight">......?</span></div>
+            <div class="rank-icon1">🥉     <span class="history-highlight">......?</span></div>            
+      </div>
+    </div>    
+  </div>
+</section>
+
 <section id="contact">
   <div class="section-tag">// Get In Touch</div>
   <h2 class="section-title">Contact</h2>
@@ -790,6 +1361,8 @@
   <div class="footer-logo">Sahityotsav'26</div>
   <div class="footer-links">
     <a href="#home">Home</a>
+    <a href="#history">History</a>
+    <a href="#poll">Poll</a>
     <a href="#results">About Participant</a>
     <a href="#teams">Teams</a>
     <a href="#contact">Contact</a>
@@ -842,6 +1415,49 @@ const programmes = {
   AYYAYA: ["LOWER PRIMARY", 'Thahfeez A', 'Calligraphy'],
 };
 
+// ── FLOATING LETTERS ──
+(function() {
+ const letters = [
+    // Arabic
+    'ا','ب','ت','ث','ج','ح','خ','د','ذ','ر','ز','س','ش','ص','ض','ط',
+    'ظ','ع','غ','ف','ق','ك','ل','م','ن','ه','و','ي','ة','ى',
+    // Malayalam
+    'ക','മ','ന','ല','ര','പ','ത','സ','അ','ഇ','ഉ','എ','ഒ','ഷ','ഴ',
+    // English
+    'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P'
+  ];
+
+  const colors = [
+    'rgba(29,207,180,',   // teal
+    'rgba(200,240,62,',   // lime
+    'rgba(255,255,255,',  // white
+  ];
+  const wrap = document.querySelector('.floating-letters');
+  if (wrap) {
+    for (let i = 0; i < 30; i++) {
+      const el = document.createElement('span');
+      el.className = 'fl-char';
+      el.textContent = letters[Math.floor(Math.random()*letters.length)];
+      el.style.left = Math.random()*100 + 'vw';
+      el.style.fontSize = (Math.random()*3 + 1) + 'rem';
+      el.style.animationDuration = (Math.random()*12 + 8) + 's';
+      el.style.animationDelay = (Math.random()*10) + 's';
+      wrap.appendChild(el);
+    }
+  }
+})();
+
+// ── SCROLL PROGRESS BAR ──
+(function() {
+  const bar = document.getElementById('scroll-progress-bar');
+  window.addEventListener('scroll', function() {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = pct + '%';
+  }, { passive: true });
+})();
+
 // ── PARTICIPANT DATA ──
 const participantData = {
   AYYAYA: {
@@ -889,7 +1505,7 @@ const participantData = {
     'UPPER PRIMARY':    ['No Data'],
     'HIGH SCHOOL':      ['No Data'],
     'HIGHER SECONDARY': ['No Data'],
-    'JUNIOR':           ['No Data'],
+   'JUNIOR':           ['No Data'],
     'SENIOR':           ['No Data'],
   },
   PULPPARAMB: {
@@ -1026,6 +1642,133 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (target) target.scrollIntoView({ behavior: 'smooth' });
   });
 });
+
+// ── LIVE AUDIENCE POLL ──
+(function() {
+  const TEAMS = [
+    { name: 'Ayyaya',        color: 'var(--teal)' },
+    { name: 'Churangara',    color: 'var(--blue)' },
+    { name: 'Korad',         color: '#1EF505' },
+    { name: 'Kuruvattisseri',color: 'var(--purple)' },
+    { name: 'Onakkad',       color: 'var(--lemonteal)' },
+    { name: 'Ozhur',         color: 'var(--darkorange)' },
+    { name: 'Pulpparamb',    color: 'var(--pink)' },
+    { name: 'Thalakkattur',  color: 'var(--newbrown)' },
+    { name: 'Vellachal',     color: 'var(--red)' },
+  ];
+
+  const STORAGE_KEY = 'sahityotsav26_poll';
+
+  function loadData() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch(e) {}
+    const d = { votes: {}, voted: null };
+    TEAMS.forEach(t => { d.votes[t.name] = Math.floor(Math.random() * 18) + 2; });
+    return d;
+  }
+
+  function saveData(d) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); } catch(e) {}
+  }
+
+  function totalVotes(votes) {
+    return Object.values(votes).reduce((a, b) => a + b, 0);
+  }
+
+  function render() {
+    const d = loadData();
+    const total = totalVotes(d.votes);
+    const grid = document.getElementById('pollGrid');
+    const meta = document.getElementById('pollMeta');
+    const resetBtn = document.getElementById('pollResetBtn');
+    if (!grid) return;
+    grid.innerHTML = '';
+
+    TEAMS.forEach(function(team) {
+      const pct = total > 0 ? Math.round((d.votes[team.name] / total) * 100) : 0;
+      const isVoted = d.voted === team.name;
+      const hasVoted = !!d.voted;
+
+      const div = document.createElement('div');
+      div.className = 'poll-option' + (isVoted ? ' voted' : '');
+      div.innerHTML = `
+        <div class="poll-top">
+          <span class="poll-name" style="color:${isVoted ? team.color : 'var(--text)'}">${team.name}${isVoted ? '<span class="poll-voted-badge">✓ Your Vote</span>' : ''}</span>
+          <span class="poll-pct" style="color:${team.color}">${pct}%</span>
+        </div>
+        <div class="poll-bar-bg">
+          <div class="poll-bar-fill" data-width="${pct}%" style="background:linear-gradient(90deg,${team.color},var(--lime));width:0%"></div>
+        </div>
+        <div class="poll-vote-count">${d.votes[team.name]} vote${d.votes[team.name] !== 1 ? 's' : ''}</div>
+      `;
+
+      if (!hasVoted) {
+        div.addEventListener('click', function() {
+          d.votes[team.name]++;
+          d.voted = team.name;
+          saveData(d);
+          render();
+        });
+      }
+
+      grid.appendChild(div);
+    });
+
+    // Animate bars after render
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        grid.querySelectorAll('.poll-bar-fill[data-width]').forEach(function(bar) {
+          bar.style.width = bar.dataset.width;
+        });
+      });
+    });
+
+    meta.textContent = total + ' total vote' + (total !== 1 ? 's' : '');
+    resetBtn.style.display = d.voted ? 'inline-block' : 'none';
+  }
+
+  window.resetPoll = function() {
+    try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+    render();
+  };
+
+  render();
+})();
+
+// ── CAROUSEL ──
+(function() {
+  var current = 0;
+  var total = 6;
+  var track = document.getElementById('carouselTrack');
+  var dotsWrap = document.getElementById('carouselDots');
+  var autoTimer;
+
+  for (var i = 0; i < total; i++) {
+    var d = document.createElement('button');
+    d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Slide ' + (i + 1));
+    (function(idx) { d.onclick = function() { goTo(idx); resetTimer(); }; })(i);
+    dotsWrap.appendChild(d);
+  }
+
+  function goTo(n) {
+    current = (n + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    document.querySelectorAll('.carousel-dot').forEach(function(dot, idx) {
+      dot.classList.toggle('active', idx === current);
+    });
+  }
+
+  function resetTimer() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(function() { goTo(current + 1); }, 4000);
+  }
+
+  window.moveCarousel = function(dir) { goTo(current + dir); resetTimer(); };
+  resetTimer();
+})();
 </script>
 </body>
 </html>

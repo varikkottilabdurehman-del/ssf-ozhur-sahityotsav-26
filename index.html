@@ -284,7 +284,7 @@
   }
   .info-box--theme::before {
     content: '';
-    position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    position: absolute; left: 0; top: 0; bottom: 0; width: 3px;    
     background: linear-gradient(180deg, var(--teal), transparent);
     border-radius: 14px 0 0 14px;
   }
@@ -474,30 +474,164 @@
     color: var(--muted); font-size: 0.85rem;
   }
 
-  .result-cards { display: flex; flex-direction: column; gap: 14px; }
-  .result-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; padding: 20px 24px;
-    display: flex; align-items: center; gap: 16px;
-    animation: fadeUp 0.4s ease both;
-  }
-  .result-rank {
-    width: 40px; height: 40px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'poppins', sans-serif; font-weight: 800; font-size: 1rem;
-    flex-shrink: 0;
-  }
-  .result-rank.gold { background: rgba(240,180,41,0.15); color: var(--gold); border: 1px solid rgba(240,180,41,0.3); }
-  .result-rank.silver { background: rgba(160,174,192,0.15); color: var(--silver); border: 1px solid rgba(160,174,192,0.3); }
-  .result-rank.bronze { background: rgba(205,127,50,0.15); color: var(--bronze); border: 1px solid rgba(205,127,50,0.3); }
+  /* ─── TICKET-STYLE PARTICIPANT CARDS ─── */
+  .result-cards { display: flex; flex-direction: column; gap: 10px; }
 
-  .result-info { flex: 1; }
-  .result-name { font-weight: 300; font-size: 1rem; margin-bottom: 6px; }
-  .result-team {
-    display: inline-block; font-size: 0.72rem; font-family: 'Space Mono', monospace;
-    letter-spacing: 0.08em; background: rgba(29,207,180,0.08);
-    color: var(--teal); border: 1px solid rgba(29,207,180,0.2);
-    padding: 3px 10px; border-radius: 100px;
+  .result-card {
+    display: flex; align-items: stretch; gap: 0;
+    border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--border);
+    animation: fadeUp 0.4s ease both;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    cursor: default;
+  }
+  .result-card:hover {
+    transform: translateX(6px);
+    border-color: rgba(29,207,180,0.35);
+    box-shadow: 0 4px 24px rgba(29,207,180,0.07);
+  }
+
+  /* Left stub */
+  .ticket-stub {
+    width: 56px; flex-shrink: 0;
+    background: linear-gradient(160deg, rgba(29,207,180,0.14), rgba(200,240,62,0.07));
+    border-right: 1px dashed rgba(29,207,180,0.25);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 64px;
+  }
+  .ticket-num {
+    font-family: 'poppins', sans-serif; font-size: 1rem; font-weight: 700;
+    color: var(--teal);
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    letter-spacing: 0.05em;
+  }
+
+  /* Main body */
+  .ticket-body {
+    flex: 1; padding: 14px 20px;
+    background: var(--card);
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 14px;
+  }
+
+  .result-info { flex: 1; min-width: 0; }
+  .result-name {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600; font-size: 1rem;
+    margin-bottom: 3px; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+  .result-unit-label {
+    font-size: 0.68rem; font-family: 'poppins', monospace;
+    letter-spacing: 0.08em; color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .ticket-cat-badge {
+    font-size: 0.6rem; font-family: 'poppins', monospace;
+    letter-spacing: 0.1em; padding: 4px 10px; border-radius: 100px;
+    text-transform: uppercase; white-space: nowrap; flex-shrink: 0;
+    background: rgba(29,207,180,0.08); color: var(--teal);
+    border: 1px solid rgba(29,207,180,0.22);
+  }
+
+  /* keep old selectors harmless */
+  .result-rank { display: none; }
+  .result-team { display: none; }
+
+/* ─── VENUE MAP CARD ─── */
+  #venue-map { background: var(--dark); }
+  .venue-map-inner {
+    display: flex; justify-content: center; align-items: flex-start;
+    padding-top: 10px;
+  }
+  .venue-map-card {
+    width: 100%; max-width: 540px;
+    background: var(--card);
+    border: 1px solid rgba(29,207,180,0.25);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(29,207,180,0.1), 0 0 40px rgba(29,207,180,0.08);
+    transition: box-shadow 0.3s ease;
+  }
+  .venue-map-card:hover {
+    box-shadow: 0 0 0 1px rgba(29,207,180,0.35), 0 0 60px rgba(29,207,180,0.14);
+  }
+  .venue-map-visual {
+    height: 220px;
+    background: #0a1515;
+    position: relative;
+    overflow: hidden;
+    background-image:
+      linear-gradient(rgba(29,207,180,0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(29,207,180,0.1) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .venue-map-roads {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+  }
+  .venue-map-pin {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -65%);
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .venue-pin-dot {
+    width: 22px; height: 22px;
+    background: var(--teal);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    box-shadow: 0 0 18px var(--teal), 0 0 36px rgba(29,207,180,0.4);
+  }
+  .venue-pin-pulse {
+    position: absolute;
+    width: 44px; height: 44px;
+    border: 2px solid rgba(29,207,180,0.45);
+    border-radius: 50%;
+    top: -11px; left: -11px;
+    animation: venuePinPulse 1.8s ease-out infinite;
+  }
+  .venue-pin-pulse2 {
+    position: absolute;
+    width: 64px; height: 64px;
+    border: 1.5px solid rgba(29,207,180,0.2);
+    border-radius: 50%;
+    top: -21px; left: -21px;
+    animation: venuePinPulse 1.8s ease-out 0.5s infinite;
+  }
+  @keyframes venuePinPulse {
+    0%   { transform: scale(0.7); opacity: 1; }
+    100% { transform: scale(1.5); opacity: 0; }
+  }
+  .venue-map-info {
+    padding: 22px 26px 24px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .venue-map-name {
+    font-family: 'poppins', sans-serif; font-weight: 800;
+    font-size: 1.2rem; color: var(--text);
+  }
+  .venue-map-addr {
+    font-size: 0.85rem; color: var(--muted); line-height: 1.6;
+  }
+  .venue-map-row {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 4px;
+  }
+  .venue-map-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--teal); color: var(--dark);
+    font-family: 'poppins', sans-serif; font-weight: 700; font-size: 0.8rem;
+    padding: 10px 20px; border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .venue-map-btn:hover { background: var(--lime); transform: translateY(-2px); }
+  .venue-map-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(29,207,180,0.08); border: 1px solid rgba(29,207,180,0.25);
+    color: var(--teal); font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.1em;
+    padding: 8px 14px; border-radius: 8px;
+    text-transform: uppercase;
   }
 
   /* ─── PROGRAMMES ─── */
@@ -749,7 +883,7 @@
     overflow: hidden;
     transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
   }
-  .history-item:hover { border-color: rgba(29,207,180,0.3); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.3); }
+  .history-item:hover { border-color: rgba(29,207,180,0.4); box-shadow: 0 0 20px rgba(29,207,180,0.08); }
   .history-item.current-year { border-color: rgba(29,207,180,0.4); box-shadow: 0 0 20px rgba(29,207,180,0.08); }
 
   /* Card header row: year badge + info + chevron */
@@ -835,7 +969,7 @@
       <a class="nav-link active" href="#home">Home <span class="sr-only">(current)</span></a>
       <a class="nav-link" href="#scoreboard">Team Points</a>
       <a class="nav-link" href="#results">About Participant</a>
-      <a class="nav-link" href="#teams">Teams</a>
+      <a class="nav-link" href="#venue-map">Venue</a>
       <a class="nav-link" href="#gallery">Gallery</a>
       <a class="nav-link" href="#history">History</a>
       <a class="nav-link" href="#contact">Contact</a>
@@ -1032,6 +1166,59 @@
   </div>
 </section>
 
+<!-- VENUE MAP -->
+<section id="venue-map">
+  <div class="section-tag">// Location</div>
+  <h2 class="section-title">Venue</h2>
+  <p class="section-sub">Find us at the heart of Ozhur Sector.</p>
+
+  <div class="venue-map-inner">
+    <div class="venue-map-card">
+
+      <!-- Teal grid map visual with pulsing pin -->
+      <div class="venue-map-visual">
+        <svg class="venue-map-roads" viewBox="0 0 540 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Main horizontal roads -->
+          <line x1="0" y1="110" x2="540" y2="110" stroke="rgba(29,207,180,0.22)" stroke-width="7"/>
+          <line x1="0" y1="60"  x2="540" y2="60"  stroke="rgba(29,207,180,0.1)"  stroke-width="3"/>
+          <line x1="0" y1="165" x2="540" y2="165" stroke="rgba(29,207,180,0.1)"  stroke-width="3"/>
+          <!-- Main vertical roads -->
+          <line x1="270" y1="0" x2="270" y2="220" stroke="rgba(29,207,180,0.22)" stroke-width="7"/>
+          <line x1="140" y1="0" x2="140" y2="220" stroke="rgba(29,207,180,0.1)"  stroke-width="3"/>
+          <line x1="400" y1="0" x2="400" y2="220" stroke="rgba(29,207,180,0.1)"  stroke-width="3"/>
+          <!-- Diagonal accent road -->
+          <line x1="0" y1="220" x2="200" y2="60"  stroke="rgba(29,207,180,0.07)" stroke-width="2"/>
+          <line x1="340" y1="0" x2="540" y2="160" stroke="rgba(29,207,180,0.07)" stroke-width="2"/>
+          <!-- Block fill hints -->
+          <rect x="145" y="65"  width="120" height="40" rx="4" fill="rgba(29,207,180,0.04)"/>
+          <rect x="275" y="115" width="120" height="45" rx="4" fill="rgba(29,207,180,0.04)"/>
+          <rect x="145" y="115" width="120" height="45" rx="4" fill="rgba(200,240,62,0.03)"/>
+        </svg>
+
+        <!-- Pulsing pin -->
+        <div class="venue-map-pin">
+          <div class="venue-pin-pulse2"></div>
+          <div class="venue-pin-pulse"></div>
+          <div class="venue-pin-dot"></div>
+        </div>
+      </div>
+
+      <!-- Info below the map -->
+      <div class="venue-map-info">
+        <div class="venue-map-name">Ozhur Sector Sahityotsav'26</div>
+        <div class="venue-map-addr">Ozhur Sector Sahityotsav'26 is Conducting in Thalakkattur,Ozhur, Malappuram, Kerala. Click  Get Direction box for Get Exact Location Of Venues.</div>
+        <div class="venue-map-row">
+          <a class="venue-map-btn" href="https://maps.app.goo.gl/TvQmeGw2QzgK1hmh9" target="_blank" rel="noopener">
+            Get Direction </a>
+           </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
 <!-- TEAMS -->
 <section id="teams">
   <div class="section-tag">// Competing Teams</div>
@@ -1116,33 +1303,54 @@
 
       <!-- SLIDE 1 — Copy image link address and paste inside src="" only -->
       <div class="carousel-slide">
-        <img src="https://scontent.fccj3-1.fna.fbcdn.net/v/t39.30808-6/480913547_1026532016176450_1507093652544945138_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=7b2446&_nc_ohc=l26TMJMHP7AQ7kNvwGEEU_t&_nc_oc=AdpwPsTTWa99mXIus7TOdaH4Fg3_9p6QGdaDmwt2B7nrdddv9zLrOimkBazfdss-djE&_nc_zt=23&_nc_ht=scontent.fccj3-1.fna&_nc_gid=bWmVUU-PBJjxwtcEDyJPcw&_nc_ss=7f289&oh=00_Af6mLG03eVKUzjFgVnUPSM0daj9c72UcoR1CMgsrQOFK4A&oe=6A02581E" alt="Gallery Photo 1">
+        <img src="https://scontent.fccj3-1.fna.fbcdn.net/v/t39.30808-6/689863479_1542236130866519_3874732987676485753_n.jpg?stp=dst-jpg_s720x720_tt6&_nc_cat=104&ccb=1-7&_nc_sid=7b2446&_nc_ohc=pw1Mm-FykTAQ7kNvwFHhebr&_nc_oc=AdqMM4j6so4rnnpTexlbluEm2V8vHjY0LYuBK98UrZ2KY71inI2drER04ywtxXKMjHA&_nc_zt=23&_nc_ht=scontent.fccj3-1.fna&_nc_gid=7YQYPJ0ZY1FqigOt1vS-gA&_nc_ss=7f2a8&oh=00_Af4WXFD0R1txvZ8KqJmD70Pd2zSQOhsTtE9U-B94G9qh_Q&oe=6A03F2A8" alt="Gallery Photo 1">
       </div>
 
       <!-- SLIDE 2 — Copy image link address and paste inside src="" only -->
       <div class="carousel-slide">
-        <img src="https://scontent.fccj3-1.fna.fbcdn.net/v/t39.30808-6/485935819_1050926190403699_8345254822584766873_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=13d280&_nc_ohc=DjVRFFy4_qEQ7kNvwEW2F4U&_nc_oc=AdoTRDu3ZBxfBCFVf2x9JKstm07-2YtkKMwUFxfItNt_f1jv6Psqq9QHy2rkVZHUeDHl1XypL2FzFvOsSBnTtGAY&_nc_zt=23&_nc_ht=scontent.fccj3-1.fna&_nc_gid=L8pMDlqwIYTIyCWp-HvAAA&_nc_ss=7f289&oh=00_Af7HRSPP1Qyyavl5-7cZKya3iTHLN20L7-iDphGb8DgePg&oe=69FEAA44" alt="Gallery Photo 2">
+        <img src="https://scontent.fccj3-1.fna.fbcdn.net/v/t39.30808-6/506475781_579721295178945_5799204185562520599_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=13d280&_nc_ohc=cKntfoEhjSEQ7kNvwHnSoq1&_nc_oc=AdqxuWkm9jEmtLEl5jpkHzmQa_A1A2Hc_Adw40OoJzZVRUcWAVedHVS5Feb-1Rb9-OHuKjKLjYx5G3Om5xLHKeUj&_nc_zt=23&_nc_ht=scontent.fccj3-1.fna&_nc_gid=hfDo9YmnkVpRkL2iXPgDAg&_nc_ss=7f2a8&oh=00_Af69c-mE1a4l81Dj5nKfaeTDDN9m83boAI9F86z7xMpTFg&oe=6A0492A5" alt="Gallery Photo 2">
       </div>
 
       <!-- SLIDE 3 — Copy image link address and paste inside src="" only -->
       <div class="carousel-slide">
-        <img src="https://cdn.britannica.com/35/238335-050-2CB2EB8A/Lionel-Messi-Argentina-Netherlands-World-Cup-Qatar-2022.jpg" alt="Gallery Photo 3">
+        <img src="https://scontent.fccj3-1.fna.fbcdn.net/v/t39.30808-6/474473324_475629728921436_8073953249916265511_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=13d280&_nc_ohc=G6q3Xu42McAQ7kNvwFZ8j8U&_nc_oc=Adqr96MNf9_gldw7wiKO4iAxfYNWsIfpld8zld7lWzVF32C8_F0E2vdodI3dNPEGyHBxW1Ug_QKPFyGQRew1tWeU&_nc_zt=23&_nc_ht=scontent.fccj3-1.fna&_nc_gid=SNfOJskJ3bs96pvIU3BHoQ&_nc_ss=7f2a8&oh=00_Af5Q9lFn_Kzg65jywu4Ah2e-LuEm3wT30rzG31jX3XZWhw&oe=6A048650" alt="Gallery Photo 3">
       </div>
 
       <!-- SLIDE 4 — Copy image link address and paste inside src="" only -->
       <div class="carousel-slide">
-        <img src="https://scontent.fccj3-1.fna.fbcdn.net/v/t39.30808-6/480460565_1026531909509794_6601849180586724743_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=7b2446&_nc_ohc=fzRFOnqWeNYQ7kNvwFmsit9&_nc_oc=AdpzAwCoyjoD2vrGwKu7SiCWFq0kxT73mh3eCNm3xGrEMAY9hFiYjUXHbchP5yMgxmw&_nc_zt=23&_nc_ht=scontent.fccj3-1.fna&_nc_gid=_bITbJPUq5KBqJrCuXnLng&_nc_ss=7f289&oh=00_Af47qk55RxwzZm1UaHklBU3JXTAV7eno8LrrlVs4R1mYXg&oe=6A0260FC" alt="Gallery Photo 4">
+        <img src="https://scontent.fccj3-1.fna.fbcdn.net/v/t39.30808-6/480913547_1026532016176450_1507093652544945138_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=7b2446&_nc_ohc=l26TMJMHP7AQ7kNvwGEEU_t&_nc_oc=AdpwPsTTWa99mXIus7TOdaH4Fg3_9p6QGdaDmwt2B7nrdddv9zLrOimkBazfdss-djE&_nc_zt=23&_nc_ht=scontent.fccj3-1.fna&_nc_gid=bWmVUU-PBJjxwtcEDyJPcw&_nc_ss=7f289&oh=00_Af6mLG03eVKUzjFgVnUPSM0daj9c72UcoR1CMgsrQOFK4A&oe=6A02581E" alt="Gallery Photo 4">
       </div>
 
       <!-- SLIDE 5 — Copy image link address and paste inside src="" only -->
       <div class="carousel-slide">
-        <img src="https://scontent.fccj3-1.fna.fbcdn.net/v/t39.30808-6/511189615_24137567052534341_8356357856693966865_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=7b2446&_nc_ohc=Sq00WCkd4rAQ7kNvwGZv1Tj&_nc_oc=Adrkp42OmH4PUtKBEvLGeUJG-8_wKdUOy23H4aIzmlieFrYYL1DT_RkT2aFxNMfRLmc&_nc_zt=23&_nc_ht=scontent.fccj3-1.fna&_nc_gid=xGRIbimqj71SIh1jPjv01A&_nc_ss=7f289&oh=00_Af73_K_jVdfsTjDPVHX8dpNGaiwzbBcbGBTuW5QXpO-idg&oe=6A027160" alt="Gallery Photo 5">
+        <img src="https://scontent.fccj3-1.fna.fbcdn.net/v/t39.30808-6/480460565_1026531909509794_6601849180586724743_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=7b2446&_nc_ohc=fzRFOnqWeNYQ7kNvwFmsit9&_nc_oc=AdpzAwCoyjoD2vrGwKu7SiCWFq0kxT73mh3eCNm3xGrEMAY9hFiYjUXHbchP5yMgxmw&_nc_zt=23&_nc_ht=scontent.fccj3-1.fna&_nc_gid=_bITbJPUq5KBqJrCuXnLng&_nc_ss=7f289&oh=00_Af47qk55RxwzZm1UaHklBU3JXTAV7eno8LrrlVs4R1mYXg&oe=6A0260FC" alt="Gallery Photo 5">
       </div>
 
       <!-- SLIDE 6 — Copy image link address and paste inside src="" only -->
       <div class="carousel-slide">
-        <img src="" alt="Gallery Photo 6">
+        <img src="https://scontent.fccj3-1.fna.fbcdn.net/v/t39.30808-6/484306006_9615311381853149_4808266433666047624_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=7b2446&_nc_ohc=F8PPgkjpMgcQ7kNvwGESswv&_nc_oc=Adrz96uu9OXUahAFTlHLatxjbk73cscRf5-uXnDc07ElDRIbsFZgOMLpeJ1p1oLiQ3M&_nc_zt=23&_nc_ht=scontent.fccj3-1.fna&_nc_gid=37OliFrLylxPIB8n-p5lEg&_nc_ss=7f2a8&oh=00_Af4asWkGpXrD8Kah4GD6BoEWH0Dy5AALlWAWcXHGg_aE5w&oe=6A03FC02" alt="Gallery Photo 6">
       </div>
+
+      <!-- SLIDE 7 — Copy image link address and paste inside src="" only -->
+      <div class="carousel-slide">
+        <img src="https://scontent.fccj3-1.fna.fbcdn.net/v/t39.30808-6/506936310_579721301845611_478600509743585354_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=13d280&_nc_ohc=niIQK63wzOUQ7kNvwF1bSUt&_nc_oc=AdoT8JG7YFBRj5oOC3yPk2xISJRMB1IBqqfyx057f99e6s_RwqJEihfjAl2B6c3sxSG_bYO3s1NhcGezPIfNhD6h&_nc_zt=23&_nc_ht=scontent.fccj3-1.fna&_nc_gid=CfCVdY-ToFLBz4BwrC2qHQ&_nc_ss=7f2a8&oh=00_Af6UkgBH5D-RMa7Ezsz6Nu-tg4t3QAwqXgX8FebJ8n0g5g&oe=6A047147" alt="Gallery Photo 7">
+      </div>
+
+<!-- SLIDE 8 — Copy image link address and paste inside src="" only -->
+      <div class="carousel-slide">
+        <img src="https://scontent.fccj1-1.fna.fbcdn.net/v/t1.6435-9/67132573_2490522037665488_6510981051332952064_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=7b2446&_nc_ohc=OzOHW2zmdUYQ7kNvwHEjeGa&_nc_oc=AdpjcwykkJatqk6mQ_BGonoiUhQkEWkSCJxgXL-DQb_fBARSelLCXDMjI-2Tcgmembs&_nc_zt=23&_nc_ht=scontent.fccj1-1.fna&_nc_gid=6_ofRYSzgsLNSlSEr6ri3w&_nc_ss=7f2a8&oh=00_Af5YuPVVteXOuw-Lmh4X_wxBe-4EFm3_bZnkoNhpBihVZQ&oe=6A25820C" alt="Gallery Photo 8">
+      </div>
+
+<!-- SLIDE 9 — Copy image link address and paste inside src="" only -->
+      <div class="carousel-slide">
+        <img src="https://scontent.fccj3-1.fna.fbcdn.net/v/t1.6435-9/36476343_1896006830450348_3579854532546396160_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=7b2446&_nc_ohc=uLlm_L1YdsYQ7kNvwHiSzf0&_nc_oc=AdquxTSi-kbP4FrOE8lnFoS-8gK7Bl-uRXiuy5Ilambu_t4iwVFnq3aQToRYKtYLWjk&_nc_zt=23&_nc_ht=scontent.fccj3-1.fna&_nc_gid=uEmOkKus-aXLrT9bFx4VEQ&_nc_ss=7f2a8&oh=00_Af6WErPW5gS5Q4z0lWnaGlIMtXOi-pDJZ31IAAKvhP4VkA&oe=6A258BF0" alt="Gallery Photo 9">
+      </div>
+
+<!-- SLIDE 10 — Copy image link address and paste inside src="" only -->
+      <div class="carousel-slide">
+        <img src="https://scontent.fccj3-1.fna.fbcdn.net/v/t39.30808-6/511189615_24137567052534341_8356357856693966865_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=7b2446&_nc_ohc=Sq00WCkd4rAQ7kNvwGZv1Tj&_nc_oc=Adrkp42OmH4PUtKBEvLGeUJG-8_wKdUOy23H4aIzmlieFrYYL1DT_RkT2aFxNMfRLmc&_nc_zt=23&_nc_ht=scontent.fccj3-1.fna&_nc_gid=sYknRIFt2GTMs4iehNieGA&_nc_ss=7f2a8&oh=00_Af7aw2QukHJD0h3DLITeuL91whGqgShfNFGgAxLntxtt3w&oe=6A03FB20" alt="Gallery Photo 10">
+      </div>
+
 
     </div>
 
@@ -1662,7 +1870,7 @@
     <a href="#home">Home</a>
     <a href="#history">History</a>
     <a href="#results">About Participant</a>
-    <a href="#teams">Teams</a>
+    <a href="#venue-map">Venue</a>
     <a href="#contact">Contact</a>
   </div>
   <div class="footer-copy">© 2026 Ozhur Sector Sahityotsav. All rights reserved.</div>
@@ -1862,22 +2070,32 @@ function showParticipants() {
     output.innerHTML = '<div class="result-placeholder">No participants available yet</div>';
     return;
   }
-  const avatarColors = ['white'];
+
+  // Shorten long category labels for the badge
+  const catShort = cat.replace('HIGHER SECONDARY', 'H. SECONDARY')
+                      .replace('LOWER PRIMARY', 'L. PRIMARY')
+                      .replace('UPPER PRIMARY', 'U. PRIMARY')
+                      .replace('HIGH SCHOOL', 'HIGH SCHOOL');
+
   output.innerHTML = `
     <div style="margin-bottom:20px">
       <div class="section-tag">// ${unit}</div>
       <h3 style="font-family:'poppins',sans-serif;font-weight:700;font-size:1.3rem;margin-bottom:4px">${cat}</h3>
-      <p style="color:var(--muted);font-size:0.85rem">${names.length} Participants</p>
+      <p style="color:var(--muted);font-size:0.85rem">${names.length} Participant${names.length !== 1 ? 's' : ''}</p>
     </div>
     <div class="result-cards">
       ${names.map((name, i) => `
-        <div class="result-card" style="animation-delay:${i*0.08}s">
-          <div class="result-rank" style="background:rgba(29,207,180,0.08);border:1px solid rgba(29,207,180,0.2);color:${avatarColors[i]};font-size:1.1rem;font-weight:800">
-            ${String(i + 1).padStart(2, '0')}
+        <div class="result-card" style="animation-delay:${i * 0.07}s">
+          <div class="ticket-stub">
+            <div class="ticket-num">${String(i + 1).padStart(2, '0')}</div>
           </div>
-          <div class="result-info">
-            <div class="result-name" style="font-weight:600">${name}</div>
-         </div>
+          <div class="ticket-body">
+            <div class="result-info">
+              <div class="result-name">${name}</div>
+              <div class="result-unit-label">${unit}</div>
+            </div>
+            <div class="ticket-cat-badge">${catShort}</div>
+          </div>
         </div>
       `).join('')}
     </div>
@@ -1962,7 +2180,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 // ── CAROUSEL ──
 (function() {
   var current = 0;
-  var total = 6;
+  var total = 10;
   var track = document.getElementById('carouselTrack');
   var dotsWrap = document.getElementById('carouselDots');
   var autoTimer;
